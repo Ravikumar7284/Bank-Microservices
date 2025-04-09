@@ -11,7 +11,6 @@ import com.bank.accounts.mapper.AccountsMapper;
 import com.bank.accounts.mapper.CustomerMapper;
 import com.bank.accounts.repository.AccountsRepository;
 import com.bank.accounts.repository.CustomerRepository;
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 import org.springframework.stereotype.Service;
@@ -41,8 +40,6 @@ public class AccountsService {
       throw new CustomerAlreadyExistsException(
           "Customer already registered with given mobile number: " + customerDto.getMobileNumber());
     }
-    customer.setCreatedAt(LocalDateTime.now());
-    customer.setCreatedBy("Admin");
     Customer savedCustomer = customerRepository.save(customer);
     accountsRepository.save(createAccount(savedCustomer));
   }
@@ -54,8 +51,6 @@ public class AccountsService {
     account.setAccountNumber(accountNumber);
     account.setAccountType(AccountConstants.SAVINGS);
     account.setBranchAddress(AccountConstants.ADDRESS);
-    account.setCreatedAt(LocalDateTime.now());
-    account.setCreatedBy("Admin");
     return account;
   }
 
