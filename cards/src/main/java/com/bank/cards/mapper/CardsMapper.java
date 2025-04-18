@@ -9,7 +9,7 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring")
 public interface CardsMapper {
 
-  CardsDto mapToCardsDto(CardsDto cardsDto);
+  CardsDto mapToCardsDto(Cards cards);
 
   Cards mapToCards(CardsDto cardsDto);
 
