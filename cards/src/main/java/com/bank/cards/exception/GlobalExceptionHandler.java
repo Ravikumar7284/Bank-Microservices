@@ -1,7 +1,9 @@
 package com.bank.cards.exception;
 
 import com.bank.cards.dto.ErrorResponseDto;
+import jakarta.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -70,6 +72,26 @@ public class GlobalExceptionHandler {
         LocalDateTime.now()
     );
     return new ResponseEntity<>(errorResponseDTO, HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(ConstraintViolationException.class)
+  public ResponseEntity<Map<String, Object>> handleConstraintViolationException(
+      ConstraintViolationException ex) {
+
+    Map<String, Object> errorResponse = new HashMap<>();
+    List<String> errors = new ArrayList<>();
+
+    ex.getConstraintViolations().forEach(violation -> {
+      String fieldName = violation.getPropertyPath().toString();
+      fieldName = fieldName.substring(fieldName.lastIndexOf(".") + 1); // Fix field name
+      errors.add(fieldName + ": " + violation.getMessage());
+    });
+
+    errorResponse.put("status", HttpStatus.BAD_REQUEST);
+    errorResponse.put("message", "Validation failed");
+    errorResponse.put("errors", errors);
+
+    return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
   }
 
 }
