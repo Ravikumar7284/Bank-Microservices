@@ -4,6 +4,7 @@ import com.bank.loans.dto.LoansDto;
 import com.bank.loans.entity.Loans;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface LoansMapper {
@@ -13,6 +14,6 @@ public interface LoansMapper {
   LoansDto mapToLoansDo(Loans loans);
 
   @Mapping(target = "loanId", ignore = true)
-  Loans updateToLoans(LoansDto loansDto, Loans loans);
+  Loans updateToLoans(LoansDto loansDto, @MappingTarget Loans loans);
 
 }

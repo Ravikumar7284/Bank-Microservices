@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @ComponentScan("com.bank.loans")
-@EnableJpaAuditing(auditorAwareRef = "auditorAwareImpl")
+@EnableJpaAuditing(auditorAwareRef = "auditAwareImpl")
 @OpenAPIDefinition(
     info = @Info(
         title = "Loans Microservice",

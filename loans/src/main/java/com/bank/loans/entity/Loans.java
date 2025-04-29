@@ -22,9 +22,9 @@ import lombok.ToString;
 public class Loans extends Metadata {
 
   @Id
-  @Column(name = "load_id")
+  @Column(name = "loan_id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long loadId;
+  private Long loanId;
 
   @Column(name = "mobile_number")
   private String mobileNumber;

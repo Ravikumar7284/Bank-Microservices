@@ -30,7 +30,7 @@ public class CardsService {
 
   private Cards createNewCard(String mobileNumber) {
     Cards newCards = new Cards();
-    Long cardNumber = 10000L + new Random().nextInt(90000000);
+    Long cardNumber = 100000000000L + new Random().nextLong(899999999999L);
     newCards.setCardNumber(String.valueOf(cardNumber));
     newCards.setMobileNumber(mobileNumber);
     newCards.setCardType(CardsConstants.CREDIT_CARD);

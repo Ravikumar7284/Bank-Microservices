@@ -30,7 +30,7 @@ public class LoansService {
 
   private Loans createNewLoan(String mobileNumber) {
     Loans loans = new Loans();
-    Long randomLoanNumber = 10000L + new Random().nextInt(90000000);
+    Long randomLoanNumber = 100000000000L + new Random().nextLong(899999999999L);
     loans.setLoanNumber(String.valueOf(randomLoanNumber));
     loans.setMobileNumber(mobileNumber);
     loans.setLoanType(LoansConstants.HOME_LOAN);
@@ -57,7 +57,7 @@ public class LoansService {
   public boolean deleteLoan(String mobileNumber) {
     Loans loans = loansRepository.findByMobileNumber(mobileNumber).orElseThrow(
         () -> new ResourceNotFoundException("Loan", "mobileNumber", mobileNumber));
-    loansRepository.deleteById(loans.getLoadId());
+    loansRepository.deleteById(loans.getLoanId());
     return true;
   }
 
