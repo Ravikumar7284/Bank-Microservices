@@ -1,0 +1,38 @@
+services:
+  accounts:
+    image: "iamravikumar/accounts:v1"
+    container_name: accounts-ms
+    ports:
+      - "9001:9001"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - rbank
+  cards:
+    image: "iamravikumar/cards:v1"
+    container_name: cards-ms
+    ports:
+      - "9002:9002"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - rbank
+  loans:
+    image: "iamravikumar/loans:v1"
+    container_name: loans-ms
+    ports:
+      - "9003:9003"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - rbank
+networks:
+  rbank:
+    driver: "bridge"
+

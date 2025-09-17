@@ -18,3 +18,6 @@ spring:
 server:
   port: 9003
 
+build:
+  version: "1.0"
+
