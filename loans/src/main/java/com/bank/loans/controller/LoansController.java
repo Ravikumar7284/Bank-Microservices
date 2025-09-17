@@ -2,6 +2,7 @@ package com.bank.loans.controller;
 
 import com.bank.loans.constants.LoansConstants;
 import com.bank.loans.dto.ErrorResponseDto;
+import com.bank.loans.dto.LoansContactInfoDto;
 import com.bank.loans.dto.LoansDto;
 import com.bank.loans.dto.ResponseDto;
 import com.bank.loans.service.LoansService;
@@ -13,6 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -40,6 +42,9 @@ public class LoansController {
 
   private final LoansService loansService;
   private final Environment environment;
+
+  @Autowired
+  private LoansContactInfoDto loansContactInfoDto;
 
   public LoansController(LoansService loansService, Environment environment) {
     this.loansService = loansService;
@@ -211,6 +216,27 @@ public class LoansController {
   @GetMapping("/env-info")
   public ResponseEntity<String> getEnvironmentInfo() {
     return ResponseEntity.status(HttpStatus.OK).body(environment.getProperty("USERNAME"));
+  }
+
+  @Operation(
+      summary = "Get loans contact information"
+  )
+  @ApiResponses(
+      value = {
+          @ApiResponse(
+              responseCode = "200",
+              description = "Loans contact information fetch successfully"
+          ),
+          @ApiResponse(
+              responseCode = "500",
+              description = "An error occurred. Please try again or contact us",
+              content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))
+          )
+      }
+  )
+  @GetMapping("/contact-info")
+  public ResponseEntity<LoansContactInfoDto> getLoansContactInfo() {
+    return ResponseEntity.status(HttpStatus.OK).body(loansContactInfoDto);
   }
 
 }
