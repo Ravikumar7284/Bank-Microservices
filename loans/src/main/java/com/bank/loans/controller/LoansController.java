@@ -13,8 +13,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -39,9 +39,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoansController {
 
   private final LoansService loansService;
+  private final Environment environment;
 
-  public LoansController(LoansService loansService) {
+  public LoansController(LoansService loansService, Environment environment) {
     this.loansService = loansService;
+    this.environment = environment;
   }
 
   @Value("${build.version}")
@@ -186,8 +188,29 @@ public class LoansController {
       }
   )
   @GetMapping("/build-version")
-  public ResponseEntity<String> getBuildInfo() {
+  public ResponseEntity<String> getBuildVersion() {
     return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
+  }
+
+  @Operation(
+      summary = "Get environment information"
+  )
+  @ApiResponses(
+      value = {
+          @ApiResponse(
+              responseCode = "200",
+              description = "Environment information fetch successfully"
+          ),
+          @ApiResponse(
+              responseCode = "500",
+              description = "An error occurred. Please try again or contact us",
+              content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))
+          )
+      }
+  )
+  @GetMapping("/env-info")
+  public ResponseEntity<String> getEnvironmentInfo() {
+    return ResponseEntity.status(HttpStatus.OK).body(environment.getProperty("USERNAME"));
   }
 
 }
