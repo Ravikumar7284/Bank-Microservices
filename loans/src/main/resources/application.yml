@@ -2,7 +2,7 @@ spring:
   application:
     name: loans
   datasource:
-    url: jdbc:h2:mem:cards
+    url: jdbc:h2:mem:loans
     driver-class-name: org.h2.Driver
     username: sa
     password: ''
@@ -14,6 +14,12 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
+  config:
+    import:
+      - "application_qa.yml"
+  profiles:
+    active:
+      - "qa"
 
 server:
   port: 9003
@@ -21,8 +27,8 @@ server:
 loans-contact-info:
   message: "loans related APIs information"
   contact-details:
-    name: "admin"
-    email: "admin@bank.com"
+    name: "local"
+    email: "local@bank.com"
   contact-support:
     - 1234-567
     - 1234-568
