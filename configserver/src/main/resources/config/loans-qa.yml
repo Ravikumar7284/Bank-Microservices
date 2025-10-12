@@ -1,0 +1,13 @@
+loans-contact-info:
+  message: "loans related APIs information"
+  contact-details:
+    name: "qa"
+    email: "qa@bank.com"
+  contact-support:
+    - 1234-567
+    - 1234-568
+
+build:
+  version: "2.0"
+
+

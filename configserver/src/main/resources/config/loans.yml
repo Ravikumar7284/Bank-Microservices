@@ -1,0 +1,12 @@
+loans-contact-info:
+  message: "loans related APIs information"
+  contact-details:
+    name: "local"
+    email: "local@bank.com"
+  contact-support:
+    - 1234-567
+    - 1234-568
+
+build:
+  version: "1.0"
+
