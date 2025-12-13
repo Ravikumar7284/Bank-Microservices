@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class AccountsController {
 
   private AccountsService accountsService;
+
+  @Value("${build.version}")
+  private String buildVersion;
 
   @Operation(
       summary = "Create a new account"
@@ -111,5 +115,26 @@ public class AccountsController {
       return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
           .body(new ResponseDto(AccountConstants.MESSAGE_417_DELETE, AccountConstants.MESSAGE_417_DELETE));
     }
+  }
+
+  @Operation(
+      summary = "Get build version information"
+  )
+  @ApiResponses(
+      value = {
+          @ApiResponse(
+              responseCode = "200",
+              description = "Build version fetch successfully"
+          ),
+          @ApiResponse(
+              responseCode = "500",
+              description = "An error occurred. Please try again or contact us",
+              content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))
+          )
+      }
+  )
+  @GetMapping("/build-version")
+  public ResponseEntity<String> getBuildVersion() {
+    return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
   }
 }
