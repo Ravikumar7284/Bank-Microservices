@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "api/accounts", produces = MediaType.APPLICATION_JSON_VALUE)
-@AllArgsConstructor
 @Validated
 @Tag(name = "Accounts CRUD API", description = "Accounts APIs for CREATE,UPDATE,FETCH,DELETE")
 public class AccountsController {

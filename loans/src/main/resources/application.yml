@@ -15,8 +15,7 @@ spring:
     hibernate:
       ddl-auto: update
   config:
-    import:
-      - "application_qa.yml"
+    import: "optional:configserver:http://localhost:8071/"
   profiles:
     active:
       - "qa"
@@ -24,15 +23,4 @@ spring:
 server:
   port: 9003
 
-loans-contact-info:
-  message: "loans related APIs information"
-  contact-details:
-    name: "local"
-    email: "local@bank.com"
-  contact-support:
-    - 1234-567
-    - 1234-568
-
-build:
-  version: "1.0"
 
