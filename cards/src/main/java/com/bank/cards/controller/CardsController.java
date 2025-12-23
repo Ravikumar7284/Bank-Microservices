@@ -38,12 +38,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 public class CardsController {
 
-  private CardsService cardsService;
+  private final CardsService cardsService;
+  private final CardsContactInfoDto cardsContactInfoDto;
+  private final String buildVersion;
 
-  private CardsContactInfoDto cardsContactInfoDto;
-
-  @Value("${build.version}")
-  private String buildVersion;
+  public CardsController (CardsService cardsService,CardsContactInfoDto cardsContactInfoDto,@Value("${build.version}") String buildVersion){
+    this.cardsService = cardsService;
+    this.cardsContactInfoDto = cardsContactInfoDto;
+    this.buildVersion = buildVersion;
+  }
 
   @Operation(
       summary = "Create a new card"
