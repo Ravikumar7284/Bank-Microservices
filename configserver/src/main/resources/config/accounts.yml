@@ -1,2 +1,11 @@
 build:
   version: "1.0"
+
+accounts-contact-info:
+  message: "accounts related APIs information"
+  contact-details:
+    name: "local"
+    email: "local@bank.com"
+  contact-support:
+    - 1234-567
+    - 1234-568

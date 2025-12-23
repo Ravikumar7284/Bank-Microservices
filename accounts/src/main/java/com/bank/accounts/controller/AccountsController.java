@@ -1,6 +1,7 @@
 package com.bank.accounts.controller;
 
 import com.bank.accounts.constants.AccountConstants;
+import com.bank.accounts.dto.AccountsContactInfoDto;
 import com.bank.accounts.dto.CustomerDto;
 import com.bank.accounts.dto.ErrorResponseDto;
 import com.bank.accounts.dto.ResponseDto;
@@ -38,6 +39,8 @@ public class AccountsController {
 
   @Value("${build.version}")
   private String buildVersion;
+
+  private AccountsContactInfoDto accountsContactInfoDto;
 
   @Operation(
       summary = "Create a new account"
@@ -135,5 +138,10 @@ public class AccountsController {
   @GetMapping("/build-version")
   public ResponseEntity<String> getBuildVersion() {
     return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
+  }
+
+  @GetMapping("/contact-info")
+  public ResponseEntity<AccountsContactInfoDto> getAccountsContactInfoDto() {
+    return ResponseEntity.status(HttpStatus.OK).body(accountsContactInfoDto);
   }
 }

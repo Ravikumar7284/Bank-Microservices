@@ -1,6 +1,7 @@
 package com.bank.cards.controller;
 
 import com.bank.cards.constants.CardsConstants;
+import com.bank.cards.dto.CardsContactInfoDto;
 import com.bank.cards.dto.CardsDto;
 import com.bank.cards.dto.ErrorResponseDto;
 import com.bank.cards.dto.ResponseDto;
@@ -38,6 +39,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class CardsController {
 
   private CardsService cardsService;
+
+  private CardsContactInfoDto cardsContactInfoDto;
 
   @Value("${build.version}")
   private String buildVersion;
@@ -176,6 +179,11 @@ public class CardsController {
   @GetMapping("/build-version")
   public ResponseEntity<String> getBuildVersion() {
     return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
+  }
+
+  @GetMapping("/contact-info")
+  public ResponseEntity<CardsContactInfoDto> getCardsContactInfoDto(){
+    return ResponseEntity.status(HttpStatus.OK).body(cardsContactInfoDto);
   }
 
 }
