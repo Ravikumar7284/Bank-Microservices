@@ -27,8 +27,19 @@ spring:
         git:
           uri: "https://github.com/Ravikumar7284/bank-microservices-config-properties.git"
           username: "Ravikumar7284"
-          password: "***************"
+          password: "********"
           default-label: main
           timeout: 5
           clone-on-start: true
           force-pull: true
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
